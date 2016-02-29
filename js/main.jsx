@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, useRouterHistory, Route, IndexRoute, Link, hashHistory } from 'react-router';
+import { Router, useRouterHistory, hashHistory } from 'react-router';
 import { createHashHistory } from 'history';
 
 // React < 1.0: https://github.com/zilverline/react-tap-event-plugin
