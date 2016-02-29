@@ -1,0 +1,48 @@
+$animation-duration: .25s;
+
+.app-left-nav {
+  margin-top: 64px;
+}
+
+#app-main-container {
+  margin-left: 256px;
+}
+
+#app-main-content {
+  padding: 48px;
+
+  & > .content {
+    position: relative;
+
+    & > * {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+    }
+  }
+}
+
+.main-content-enter {
+  opacity: 0.01;
+  transform: translateX(-20px);
+
+  &.main-content-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity $animation-duration ease-out,
+      transform $animation-duration ease-out;
+    transition-delay: $animation-duration;
+  }
+}
+
+.main-content-leave {
+  opacity: 1;
+  transition: opacity $animation-duration ease-in,
+    transform $animation-duration ease-in;
+
+  &.main-content-leave-active {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+}
