@@ -25,7 +25,7 @@ $animation-duration: .25s;
 }
 
 .main-content-enter {
-  opacity: 0.01;
+  opacity: 0;
   transform: translateX(-20px);
 
   &.main-content-enter-active {
