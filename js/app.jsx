@@ -42,14 +42,23 @@ const App = React.createClass({
         location: React.PropTypes.object.isRequired
     },
 
+    styles: {
+        appBar: {
+            position: 'fixed',
+            top: 0
+        }
+    },
+
     handleRequestChangeList(e, value) {
         this.context.router.push(value);
     },
 
     render() {
+        const styles = this.styles;
+
         return (
             <div>
-                <AppBar title="KrakSat 2016" showMenuIconButton={false}/>
+                <AppBar title="KrakSat 2016" showMenuIconButton={false} id="app-bar" />
                 <AppLeftNav open={true} location={this.props.location}
                             onRequestChangeList={this.handleRequestChangeList}/>
                 <div id="app-main-container">
