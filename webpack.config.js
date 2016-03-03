@@ -14,6 +14,9 @@ var dir_build = path.resolve(__dirname, 'dist');
 module.exports = {
     entry: path.resolve(dir_js, 'main.jsx'),
     resolve: {
+        alias: {
+            'react-highcharts': 'react-highcharts/dist'
+        },
         // No need to add these extensions when importing
         extensions: ['', '.js', '.jsx']
     },
