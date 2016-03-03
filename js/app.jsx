@@ -58,7 +58,7 @@ const App = React.createClass({
 
         return (
             <div>
-                <AppBar title="KrakSat 2016" showMenuIconButton={false} id="app-bar" />
+                <AppBar title="KrakSat 2016" showMenuIconButton={false} style={styles.appBar} />
                 <AppLeftNav open={true} location={this.props.location}
                             onRequestChangeList={this.handleRequestChangeList}/>
                 <div id="app-main-container">
