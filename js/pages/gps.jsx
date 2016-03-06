@@ -29,6 +29,14 @@ const GPS = React.createClass({
             });
 
             let gsMarker = this.refs.gsMarker;
+            gsMarker.state.marker.setOptions({
+                icon: {
+                    url: 'assets/groundstation.svg',
+                    size: new google.maps.Size(32, 32),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(16, 16)
+                }
+            });
             this.request = $.get('http://127.0.0.1:8020/gsinfo/latest/', function (result) {
                 // todo: get gsinfo on app start
                 gsMarker.state.marker.setPosition({lat: result.latitude, lng: result.longitude});

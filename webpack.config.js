@@ -8,6 +8,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var dir_js = path.resolve(__dirname, 'js');
 var dir_html = path.resolve(__dirname, 'html');
+var dir_assets = path.resolve(__dirname, 'assets');
 var dir_scss = path.resolve(__dirname, 'scss');
 var dir_build = path.resolve(__dirname, 'dist');
 
@@ -50,6 +51,10 @@ module.exports = {
         new CopyWebpackPlugin([
             { from: dir_html } // Copy HTMLs to output.path
         ]),
+        new CopyWebpackPlugin([{
+            from: dir_assets,
+            to: 'assets'
+        }]),
         new ExtractTextPlugin('style.css', {
             allChunks: true
         }),
