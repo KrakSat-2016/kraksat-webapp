@@ -48,6 +48,9 @@ module.exports = {
         ]
     },
     plugins: [
+        new webpack.ProvidePlugin({
+            config: 'json-loader!' + path.resolve(__dirname, 'config/local.json')
+        }),
         new CopyWebpackPlugin([
             { from: dir_html } // Copy HTMLs to output.path
         ]),

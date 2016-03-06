@@ -28,7 +28,7 @@ const SHTCharts = React.createClass({
         let temperatureChart = this.refs.temperatureChart,
             humidityChart = this.refs.humidityChart;
 
-        this.request = $.get('http://127.0.0.1:8020/sht/', function(result) {
+        this.request = $.get(config.serverUrl + '/sht/', function(result) {
             let temperaturePoints = [],
                 humidityPoints = [];
 

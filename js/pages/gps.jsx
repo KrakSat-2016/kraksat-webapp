@@ -21,7 +21,7 @@ const GPS = React.createClass({
                 }]
             });
 
-            this.request = $.get('http://127.0.0.1:8020/gps/', function (result) {
+            this.request = $.get(config.serverUrl + '/gps/', function (result) {
                 // todo: auto refresh
                 for (let point of result) {
                     path.push(new google.maps.LatLng(point.latitude, point.longitude));
@@ -37,7 +37,7 @@ const GPS = React.createClass({
                     anchor: new google.maps.Point(16, 16)
                 }
             });
-            this.request = $.get('http://127.0.0.1:8020/gsinfo/latest/', function (result) {
+            this.request = $.get(config.serverUrl + '/gsinfo/latest/', function (result) {
                 // todo: get gsinfo on app start
                 gsMarker.state.marker.setPosition({lat: result.latitude, lng: result.longitude});
             });
@@ -50,7 +50,7 @@ const GPS = React.createClass({
                 <ScriptjsLoader
                     hostname={'maps.googleapis.com'}
                     pathname={'/maps/api/js'}
-                    query={{v: `3`, libraries: 'common,geometry'}}
+                    query={{v: `3`, libraries: 'common,geometry', key: config.googleMapsAPIKey}}
                     loadingElement={
                         <div>Loading...</div>
                       }
