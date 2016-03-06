@@ -2,6 +2,10 @@ import $ from 'jquery';
 import React from 'react';
 import ReactHighstock from 'react-highcharts/ReactHighstock';
 
+let temperaturePoints = [],
+    humidityPoints = [],
+    lastTimestamp = '';
+
 let chartRangeSelectorConfig = {
     buttons: [
         {count: 1, type: 'minute', text: '1M'},
@@ -23,24 +27,42 @@ let addPointsToChart = function(chartComponent, points) {
     chart.redraw();
 };
 
+let setChartData = function(chartComponent, data) {
+    let serie = chartComponent.refs.chart.getChart().series[0];
+    serie.setData(data.slice());
+};
+
 const SHTCharts = React.createClass({
     componentDidMount() {
         let temperatureChart = this.refs.temperatureChart,
             humidityChart = this.refs.humidityChart;
+        setChartData(temperatureChart, temperaturePoints);
+        setChartData(humidityChart, humidityPoints);
 
-        this.request = $.get(config.serverUrl + '/sht/', function(result) {
-            let temperaturePoints = [],
-                humidityPoints = [];
+        this.request = $.get(config.serverUrl + '/sht/?start_timestamp=' + lastTimestamp,
+            function (result) {
+                if (result.length == 0) {
+                    return;
+                }
 
-            for (let point of result) {
-                let time = (new Date(point.timestamp)).getTime();
-                temperaturePoints.push([time, parseFloat(point.temperature)]);
-                humidityPoints.push([time, parseFloat(point.humidity)]);
-            }
+                let newTemperaturePoints = [],
+                    newHumidityPoints = [];
 
-            addPointsToChart(temperatureChart, temperaturePoints);
-            addPointsToChart(humidityChart, humidityPoints);
-        });
+                for (let point of result) {
+                    let time = (new Date(point.timestamp)).getTime();
+                    let temperature = [time, parseFloat(point.temperature)],
+                        humidity = [time, parseFloat(point.humidity)];
+
+                    newTemperaturePoints.push(temperature);
+                    temperaturePoints.push(temperature);
+                    newHumidityPoints.push(humidity);
+                    humidityPoints.push(humidity);
+                }
+
+                lastTimestamp = result[result.length - 1].timestamp;
+                addPointsToChart(temperatureChart, newTemperaturePoints);
+                addPointsToChart(humidityChart, newHumidityPoints);
+            });
     },
 
     componentWillUnmount() {
