@@ -2,7 +2,9 @@
 
 ## Installation
 
-First, make sure you have `npm` installed. Then, execute:
+First, copy `config/local.json.example` to `config/local.json` and change the values if necessary.
+
+Make sure you have `npm` installed. Then, execute:
 
 ```
 npm install
