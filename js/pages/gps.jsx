@@ -77,13 +77,7 @@ const GPS = React.createClass({
                                     strokeWeight: 2
                                 }}
                             />
-                            <Marker
-                                ref='gsMarker'
-                                options={{
-                                    // todo: marker icon
-                                    // icon: 'assets/groundstation.png'
-                                }}
-                            />
+                            <Marker ref="gsMarker"/>
                         </GoogleMap>
                     }
                 />
