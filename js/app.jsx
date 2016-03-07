@@ -68,8 +68,8 @@ const App = React.createClass({
                             component="div"
                             className="content"
                             transitionName="main-content"
-                            transitionEnterTimeout={500}
-                            transitionLeaveTimeout={250}>
+                            transitionEnterTimeout={1000}
+                            transitionLeaveTimeout={500}>
                             {React.cloneElement(this.props.children, {
                                 key: this.props.location.pathname
                             })}
