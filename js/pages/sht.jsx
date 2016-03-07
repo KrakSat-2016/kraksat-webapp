@@ -1,7 +1,5 @@
 import React from 'react';
 import ReactHighstock from 'react-highcharts/ReactHighstock';
-import HighchartsExporting from 'highcharts-exporting';
-HighchartsExporting(ReactHighstock.Highcharts);
 
 import RequestHelper from 'app/requesthelper';
 import {chartRangeSelectorConfig, addPointsToChart} from 'app/charts';
