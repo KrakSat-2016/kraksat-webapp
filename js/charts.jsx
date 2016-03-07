@@ -21,7 +21,7 @@ let chartRangeSelectorConfig = {
  * @param {number} serieIndex index of serie to add the points to
  */
 let addPointsToChart = function (chartComponent, points, serieIndex) {
-    if (typeof serie === 'undefined') {
+    if (typeof serieIndex === 'undefined') {
         serieIndex = 0;
     }
     let chart = chartComponent.refs.chart.getChart();
