@@ -27,17 +27,10 @@ let addPointsToChart = function(chartComponent, points) {
     chart.redraw();
 };
 
-let setChartData = function(chartComponent, data) {
-    let serie = chartComponent.refs.chart.getChart().series[0];
-    serie.setData(data.slice());
-};
-
 const SHTCharts = React.createClass({
     componentDidMount() {
         let temperatureChart = this.refs.temperatureChart,
             humidityChart = this.refs.humidityChart;
-        setChartData(temperatureChart, temperaturePoints);
-        setChartData(humidityChart, humidityPoints);
 
         this.request = $.get(config.serverUrl + '/sht/?start_timestamp=' + lastTimestamp,
             function (result) {
@@ -88,7 +81,7 @@ const TemperatureChart = React.createClass({
             title: {text: 'Temperature'},
             series: [{
                 name: 'Temperature',
-                data: [],
+                data: temperaturePoints.slice(),
                 tooltip: {
                     valueDecimals: 2,
                     valueSuffix: '℃'
@@ -109,7 +102,7 @@ const HumidityChart = React.createClass({
             title: {text: 'Humidity'},
             series: [{
                 name: 'Humidity',
-                data: [],
+                data: humidityPoints.slice(),
                 tooltip: {
                     valueDecimals: 2,
                     valueSuffix: '%'
