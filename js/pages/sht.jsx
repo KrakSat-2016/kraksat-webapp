@@ -1,10 +1,15 @@
-import $ from 'jquery';
 import React from 'react';
 import ReactHighstock from 'react-highcharts/ReactHighstock';
+import RequestHelper from 'app/requesthelper';
 
-let temperaturePoints = [],
-    humidityPoints = [],
-    lastTimestamp = '';
+let requestHelper = new RequestHelper('/sht/', 1000, ['temperature', 'humidity'],
+    function (point) {
+        let time = (new Date(point.timestamp)).getTime();
+        return {
+            temperature: [time, parseFloat(point.temperature)],
+            humidity: [time, parseFloat(point.humidity)]
+        };
+    });
 
 let chartRangeSelectorConfig = {
     buttons: [
@@ -31,37 +36,15 @@ const SHTCharts = React.createClass({
     componentDidMount() {
         let temperatureChart = this.refs.temperatureChart,
             humidityChart = this.refs.humidityChart;
-
-        this.request = $.get(config.serverUrl + '/sht/?start_timestamp=' + lastTimestamp,
-            function (result) {
-                if (result.length == 0) {
-                    return;
-                }
-
-                let newTemperaturePoints = [],
-                    newHumidityPoints = [];
-
-                for (let point of result) {
-                    let time = (new Date(point.timestamp)).getTime();
-                    let temperature = [time, parseFloat(point.temperature)],
-                        humidity = [time, parseFloat(point.humidity)];
-
-                    newTemperaturePoints.push(temperature);
-                    temperaturePoints.push(temperature);
-                    newHumidityPoints.push(humidity);
-                    humidityPoints.push(humidity);
-                }
-
-                lastTimestamp = result[result.length - 1].timestamp;
-                addPointsToChart(temperatureChart, newTemperaturePoints);
-                addPointsToChart(humidityChart, newHumidityPoints);
-            });
+        requestHelper.pointsProcessed = function (newPoints) {
+            addPointsToChart(temperatureChart, newPoints['temperature']);
+            addPointsToChart(humidityChart, newPoints['humidity']);
+        };
+        requestHelper.start();
     },
 
     componentWillUnmount() {
-        if (typeof this.request !== 'undefined') {
-            this.request.abort();
-        }
+        requestHelper.stop();
     },
 
     render() {
@@ -81,7 +64,7 @@ const TemperatureChart = React.createClass({
             title: {text: 'Temperature'},
             series: [{
                 name: 'Temperature',
-                data: temperaturePoints.slice(),
+                data: requestHelper.data['temperature'].slice(),
                 type: 'spline',
                 tooltip: {
                     valueDecimals: 2,
@@ -103,7 +86,7 @@ const HumidityChart = React.createClass({
             title: {text: 'Humidity'},
             series: [{
                 name: 'Humidity',
-                data: humidityPoints.slice(),
+                data: requestHelper.data['humidity'].slice(),
                 type: 'spline',
                 tooltip: {
                     valueDecimals: 2,
