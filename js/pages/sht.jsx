@@ -82,6 +82,7 @@ const TemperatureChart = React.createClass({
             series: [{
                 name: 'Temperature',
                 data: temperaturePoints.slice(),
+                type: 'spline',
                 tooltip: {
                     valueDecimals: 2,
                     valueSuffix: '℃'
@@ -103,6 +104,7 @@ const HumidityChart = React.createClass({
             series: [{
                 name: 'Humidity',
                 data: humidityPoints.slice(),
+                type: 'spline',
                 tooltip: {
                     valueDecimals: 2,
                     valueSuffix: '%'
