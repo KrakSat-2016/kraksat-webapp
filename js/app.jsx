@@ -29,6 +29,7 @@ const AppLeftNav = React.createClass({
                     <ListItem primaryText="SHT" value="/sht"/>
                     <ListItem primaryText="IMU" value="/imu"/>
                     <ListItem primaryText="Map" value="/map"/>
+                    <ListItem primaryText="GPS" value="/gps"/>
                     <ListItem primaryText="Planetary Data" value="/planet"/>
                 </SelectableList>
             </LeftNav>
