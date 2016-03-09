@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactHighstock from 'react-highcharts/ReactHighstock';
 
-import RequestHelper from 'app/requesthelper';
+import { PointRequestHelper } from 'app/requesthelper';
 import {chartRangeSelectorConfig, addPointsToChart} from 'app/charts';
 
-let requestHelper = new RequestHelper('/sht/', 1000, ['temperature', 'humidity'],
+let requestHelper = new PointRequestHelper('/sht/', 1000, ['temperature', 'humidity'],
     function (point) {
         let time = (new Date(point.timestamp)).getTime();
         return {
@@ -61,11 +61,10 @@ const SHT = React.createClass({
     componentDidMount() {
         let temperatureChart = this.refs.temperatureChart,
             humidityChart = this.refs.humidityChart;
-        requestHelper.pointsProcessed = function (newPoints) {
+        requestHelper.start(newPoints => {
             addPointsToChart(temperatureChart, newPoints['temperature']);
             addPointsToChart(humidityChart, newPoints['humidity']);
-        };
-        requestHelper.start();
+        });
     },
 
     componentWillUnmount() {

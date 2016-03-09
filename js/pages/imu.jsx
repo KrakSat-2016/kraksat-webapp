@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactHighstock from 'react-highcharts/ReactHighstock';
 
-import RequestHelper from 'app/requesthelper';
+import { PointRequestHelper } from 'app/requesthelper';
 import {chartRangeSelectorConfig, addPointsToChart} from 'app/charts';
 
-let requestHelper = new RequestHelper('/imu/', 1000, ['pressure', 'gyroX', 'gyroY', 'gyroZ',
+let requestHelper = new PointRequestHelper('/imu/', 1000, ['pressure', 'gyroX', 'gyroY', 'gyroZ',
     'accelX', 'accelY', 'accelZ', 'magnetX', 'magnetY', 'magnetZ'],
     function (point) {
         let time = (new Date(point.timestamp)).getTime();
@@ -101,7 +101,7 @@ const IMU = React.createClass({
             accelerometerChart = this.refs.accelerometerChart,
             magnetometerChart = this.refs.magnetometerChart;
 
-        requestHelper.pointsProcessed = function (newPoints) {
+        requestHelper.start(newPoints => {
             addPointsToChart(pressureChart, newPoints['pressure'], 0);
             addPointsToChart(gyroChart, newPoints['gyroX'], 0);
             addPointsToChart(gyroChart, newPoints['gyroY'], 1);
@@ -112,8 +112,7 @@ const IMU = React.createClass({
             addPointsToChart(magnetometerChart, newPoints['magnetX'], 0);
             addPointsToChart(magnetometerChart, newPoints['magnetY'], 1);
             addPointsToChart(magnetometerChart, newPoints['magnetZ'], 2);
-        };
-        requestHelper.start();
+        });
     },
 
     componentWillUnmount() {
