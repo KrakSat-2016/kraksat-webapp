@@ -4,8 +4,8 @@ import ReactHighstock from 'react-highcharts/ReactHighstock';
 import { PointRequestHelper } from 'app/requesthelper';
 import {chartRangeSelectorConfig, addPointsToChart} from 'app/charts';
 
-let requestHelper = new PointRequestHelper('/imu/', 1000, ['pressure', 'gyroX', 'gyroY', 'gyroZ',
-    'accelX', 'accelY', 'accelZ', 'magnetX', 'magnetY', 'magnetZ'],
+let requestHelper = new PointRequestHelper('/imu/', config.refreshRates.imu, ['pressure',
+    'gyroX', 'gyroY', 'gyroZ', 'accelX', 'accelY', 'accelZ', 'magnetX', 'magnetY', 'magnetZ'],
     function (point) {
         let time = (new Date(point.timestamp)).getTime();
         return {

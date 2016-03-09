@@ -5,7 +5,7 @@ import Paper from 'material-ui/lib/paper';
 
 import { RequestHelper } from 'app/requesthelper';
 
-let requestHelper = new RequestHelper('/planetarydata/latest/', 5000);
+let requestHelper = new RequestHelper('/planetarydata/latest/', config.refreshRates.planetaryData);
 
 
 const PlanetaryDataContainer = React.createClass({
