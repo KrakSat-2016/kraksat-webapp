@@ -23,7 +23,7 @@ const PlanetaryDataCard = React.createClass({
     propTypes: {
         unit: React.PropTypes.string,
         propertyName: React.PropTypes.string.isRequired,
-        value: React.PropTypes.any.isRequired
+        value: React.PropTypes.any
     },
 
     render() {
