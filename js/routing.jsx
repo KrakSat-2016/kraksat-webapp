@@ -5,7 +5,7 @@ import { App, NoMatch } from './app'
 import Telemetry from './pages/telemetry';
 import SHT from './pages/sht';
 import IMU from './pages/imu';
-import GPS from './pages/gps';
+import Map from './pages/map';
 import PlanetaryData from './pages/planetarydata';
 
 const AppRoutes = (
@@ -13,7 +13,7 @@ const AppRoutes = (
         <IndexRoute component={Telemetry}/>
         <Route path="sht" component={SHT}/>
         <Route path="imu" component={IMU}/>
-        <Route path="gps" component={GPS}/>
+        <Route path="map" component={Map}/>
         <Route path="planet" component={PlanetaryData}/>
         <Route path="*" component={NoMatch}/>
     </Route>

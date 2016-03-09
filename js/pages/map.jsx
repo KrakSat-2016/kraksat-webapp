@@ -3,7 +3,7 @@ import React from 'react';
 import {GoogleMapLoader, GoogleMap, Marker, Polyline} from 'react-google-maps';
 import ScriptjsLoader from 'react-google-maps/lib/async/ScriptjsLoader';
 
-const GPS = React.createClass({
+const Map = React.createClass({
     getInitialState() {
         return {
             mapLoaded: false
@@ -86,4 +86,4 @@ const GPS = React.createClass({
     }
 });
 
-export default GPS;
+export default Map;
