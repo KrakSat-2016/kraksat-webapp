@@ -47,7 +47,7 @@ const PlanetaryDataCard = React.createClass({
                 );
             } else {
                 // Avoid long decimal fractions when not using exponential notation
-                valueString = value.toFixed(4).replace(/\.?0+$/, '');
+                valueString = value.toString().substring(0, 12).replace(/\.?0+$/, '');
             }
 
             let unitDisplayed = unit ? unit : '';
