@@ -33,8 +33,9 @@ const PlanetaryDataCard = React.createClass({
 
         let valueDisplayed;
         if (value) {
-            let valueString;
-            if (Math.log10(value) > 6 || Math.log10(value) < -5) {
+            let valueString,
+                valueExponential = Math.log(value) / Math.LN10;
+            if (valueExponential > 6 || valueExponential < -5) {
                 // Use exponential notation for long numbers
                 valueString = value.toExponential(3).replace('e+', 'e');
                 let ePos = valueString.indexOf('e');
