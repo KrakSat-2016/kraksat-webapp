@@ -33,7 +33,7 @@ const PlanetaryDataCard = React.createClass({
         if (value) {
             let valueString,
                 valueExponential = Math.log(value) / Math.LN10;
-            if (valueExponential > 6 || valueExponential < -5) {
+            if (valueExponential >= 9 || valueExponential < -5) {
                 // Use exponential notation for long numbers
                 valueString = value.toExponential(3).replace('e+', 'e');
                 let ePos = valueString.indexOf('e');
@@ -46,7 +46,7 @@ const PlanetaryDataCard = React.createClass({
                 );
             } else {
                 // Avoid long decimal fractions when not using exponential notation
-                valueString = value.toString().substring(0, 9).replace(/\.?0+$/, '');
+                valueString = value.toString().substring(0, 9).replace(/\.0+$/, '');
             }
 
             let unitDisplayed = unit ? unit : '';
@@ -104,15 +104,16 @@ const PlanetaryData = React.createClass({
                 <h1>Planetary Data</h1>
                 <PlanetaryDataContainer>
                     <PlanetaryDataCard propertyName="Mass" value={this.state.mass} unit="kg"/>
-                    <PlanetaryDataCard propertyName="Radius" value={this.state.radius} unit="km"/>
+                    <PlanetaryDataCard propertyName="Radius" value={this.state.radius / 1000}
+                                       unit="km"/>
                     <PlanetaryDataCard propertyName="Escape velocity"
-                                       value={this.state.escape_velocity} unit="km/s"/>
+                                       value={this.state.escape_velocity / 1000} unit="km/s"/>
                     <PlanetaryDataCard propertyName="Average density"
-                                       value={this.state.average_density} unit="g/cm³"/>
+                                       value={this.state.average_density} unit="kg/m³"/>
                     <PlanetaryDataCard propertyName="Earth Similarity Index"
                                        value={this.state.earth_similarity_index}/>
                     <PlanetaryDataCard propertyName="Average molar mass of the atmosphere"
-                                       value={this.state.avg_atm_molar_mass} unit="g/mol"/>
+                                       value={this.state.avg_atm_molar_mass / 1000} unit="g/mol"/>
                     <PlanetaryDataCard propertyName="Speed of sound"
                                        value={this.state.speed_of_sound} unit="m/s"/>
                     <PlanetaryDataCard propertyName="Adiabatic index"
@@ -120,7 +121,7 @@ const PlanetaryData = React.createClass({
                     <PlanetaryDataCard propertyName="Density of the atmosphere"
                                        value={this.state.atmosphere_density} unit="kg/m³"/>
                     <PlanetaryDataCard propertyName="Average mass of a single molecule"
-                                       value={this.state.avg_molecule_mass} unit="g"/>
+                                       value={this.state.avg_molecule_mass} unit="kg"/>
                     <PlanetaryDataCard propertyName="Specific gas constant"
                                        value={this.state.specific_gas_const} unit="J/K×mol"/>
                     <PlanetaryDataCard propertyName="Refractive index"
@@ -128,7 +129,7 @@ const PlanetaryData = React.createClass({
                     <PlanetaryDataCard propertyName="Molar refractivity"
                                        value={this.state.molar_refractivity} unit="m³/mol"/>
                     <PlanetaryDataCard propertyName="Speed of light in the atmosphere"
-                                       value={this.state.atm_speed_of_light} unit="km/s"/>
+                                       value={this.state.atm_speed_of_light} unit="m/s"/>
                 </PlanetaryDataContainer>
             </div>
         );
