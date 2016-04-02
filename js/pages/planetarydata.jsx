@@ -82,9 +82,10 @@ const PlanetaryData = React.createClass({
     getInitialState() {
         return {
             timestamp: '', mass: '', radius: '', escape_velocity: '', average_density: '',
-            earth_similarity_index: '', avg_atm_molar_mass: '', adiabatic_index: '',
-            atmosphere_density: '', avg_molecule_mass: '', specific_gas_const: '',
-            refractive_index: '', molar_refractivity: '', atm_speed_of_light: ''
+            earth_similarity_index: '', avg_atm_molar_mass: '', speed_of_sound: '',
+            adiabatic_index: '', atmosphere_density: '', avg_molecule_mass: '',
+            specific_gas_const: '', refractive_index: '', molar_refractivity: '',
+            atm_speed_of_light: ''
         }
     },
 
@@ -114,6 +115,8 @@ const PlanetaryData = React.createClass({
                                        value={this.state.earth_similarity_index}/>
                     <PlanetaryDataCard propertyName="Average molar mass of the atmosphere"
                                        value={this.state.avg_atm_molar_mass} unit="g/mol"/>
+                    <PlanetaryDataCard propertyName="Speed of sound"
+                                       value={this.state.speed_of_sound} unit="m/s"/>
                     <PlanetaryDataCard propertyName="Adiabatic index"
                                        value={this.state.adiabatic_index}/>
                     <PlanetaryDataCard propertyName="Density of the atmosphere"
