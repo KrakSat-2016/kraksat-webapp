@@ -1,5 +1,3 @@
-import $ from 'jquery';
-
 import React from 'react';
 import Paper from 'material-ui/lib/paper';
 
