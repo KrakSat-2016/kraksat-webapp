@@ -25,7 +25,7 @@ const AppLeftNav = React.createClass({
                     value: location.pathname,
                     requestChange: onRequestChangeList
                 }}>
-                    <ListItem primaryText="Telemetry" value="/"/>
+                    <ListItem primaryText="Live" value="/"/>
                     <ListItem primaryText="SHT" value="/sht"/>
                     <ListItem primaryText="IMU" value="/imu"/>
                     <ListItem primaryText="Map" value="/map"/>
