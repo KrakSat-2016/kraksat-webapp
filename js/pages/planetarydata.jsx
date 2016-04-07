@@ -1,79 +1,9 @@
 import React from 'react';
-import Paper from 'material-ui/lib/paper';
 
 import { RequestHelper } from 'app/requesthelper';
+import {CardContainer, Card} from 'app/cards';
 
 let requestHelper = new RequestHelper('/planetarydata/latest/', config.refreshRates.planetaryData);
-
-
-const PlanetaryDataContainer = React.createClass({
-    render() {
-        return (
-            <div className="planetaryDataContainer">
-                {this.props.children}
-            </div>
-        );
-    }
-});
-
-
-const PlanetaryDataCard = React.createClass({
-    propTypes: {
-        unit: React.PropTypes.string,
-        propertyName: React.PropTypes.string.isRequired,
-        value: React.PropTypes.any
-    },
-
-    render() {
-        const {
-            unit, propertyName, value
-        } = this.props;
-
-        let valueDisplayed;
-        if (value) {
-            let valueString,
-                valueExponential = Math.log(value) / Math.LN10;
-            if (valueExponential >= 9 || valueExponential < -5) {
-                // Use exponential notation for long numbers
-                valueString = value.toExponential(3).replace('e+', 'e');
-                let ePos = valueString.indexOf('e');
-                valueString = (
-                    <span>
-                        {valueString.substring(0, ePos)}
-                        ×10
-                        <sup>{valueString.substring(ePos + 1)}</sup>
-                    </span>
-                );
-            } else {
-                // Avoid long decimal fractions when not using exponential notation
-                valueString = value.toString().substring(0, 9).replace(/\.0+$/, '');
-            }
-
-            let unitDisplayed = unit ? unit : '';
-            let slashPos = unitDisplayed.indexOf('/');
-            if (slashPos != -1) {
-                // Display units with / as fractions
-                unitDisplayed = (
-                    <span>
-                        <sup>{unit.substring(0, slashPos)}</sup>
-                        /
-                        <sub>{unit.substring(slashPos + 1)}</sub>
-                    </span>
-                );
-            }
-            valueDisplayed = (<span>{valueString} {unitDisplayed}</span>);
-        } else {
-            valueDisplayed = (<span className="unknownValue">Unknown</span>);
-        }
-
-        return (
-            <Paper zDepth={1} className="planetaryDataCard">
-                <div className="value">{valueDisplayed}</div>
-                <div className="property">{propertyName}</div>
-            </Paper>
-        );
-    }
-});
 
 
 const PlanetaryData = React.createClass({
@@ -102,35 +32,32 @@ const PlanetaryData = React.createClass({
         return (
             <div>
                 <h1>Planetary Data</h1>
-                <PlanetaryDataContainer>
-                    <PlanetaryDataCard propertyName="Mass" value={this.state.mass} unit="kg"/>
-                    <PlanetaryDataCard propertyName="Radius" value={this.state.radius / 1000}
-                                       unit="km"/>
-                    <PlanetaryDataCard propertyName="Escape velocity"
+                <CardContainer>
+                    <Card propertyName="Mass" value={this.state.mass} unit="kg"/>
+                    <Card propertyName="Radius" value={this.state.radius / 1000} unit="km"/>
+                    <Card propertyName="Escape velocity"
                                        value={this.state.escape_velocity / 1000} unit="km/s"/>
-                    <PlanetaryDataCard propertyName="Average density"
+                    <Card propertyName="Average density"
                                        value={this.state.average_density} unit="kg/m³"/>
-                    <PlanetaryDataCard propertyName="Earth Similarity Index"
+                    <Card propertyName="Earth Similarity Index"
                                        value={this.state.earth_similarity_index}/>
-                    <PlanetaryDataCard propertyName="Average molar mass of the atmosphere"
+                    <Card propertyName="Average molar mass of the atmosphere"
                                        value={this.state.avg_atm_molar_mass / 1000} unit="g/mol"/>
-                    <PlanetaryDataCard propertyName="Speed of sound"
+                    <Card propertyName="Speed of sound"
                                        value={this.state.speed_of_sound} unit="m/s"/>
-                    <PlanetaryDataCard propertyName="Adiabatic index"
-                                       value={this.state.adiabatic_index}/>
-                    <PlanetaryDataCard propertyName="Density of the atmosphere"
+                    <Card propertyName="Adiabatic index" value={this.state.adiabatic_index}/>
+                    <Card propertyName="Density of the atmosphere"
                                        value={this.state.atmosphere_density} unit="kg/m³"/>
-                    <PlanetaryDataCard propertyName="Average mass of a single molecule"
+                    <Card propertyName="Average mass of a single molecule"
                                        value={this.state.avg_molecule_mass} unit="kg"/>
-                    <PlanetaryDataCard propertyName="Specific gas constant"
+                    <Card propertyName="Specific gas constant"
                                        value={this.state.specific_gas_const} unit="J/K×mol"/>
-                    <PlanetaryDataCard propertyName="Refractive index"
-                                       value={this.state.refractive_index}/>
-                    <PlanetaryDataCard propertyName="Molar refractivity"
+                    <Card propertyName="Refractive index" value={this.state.refractive_index}/>
+                    <Card propertyName="Molar refractivity"
                                        value={this.state.molar_refractivity} unit="m³/mol"/>
-                    <PlanetaryDataCard propertyName="Speed of light in the atmosphere"
+                    <Card propertyName="Speed of light in the atmosphere"
                                        value={this.state.atm_speed_of_light} unit="m/s"/>
-                </PlanetaryDataContainer>
+                </CardContainer>
             </div>
         );
     }
