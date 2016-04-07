@@ -16,13 +16,14 @@ const CardContainer = React.createClass({
 const Card = React.createClass({
     propTypes: {
         unit: React.PropTypes.string,
+        noUnitSpace: React.PropTypes.bool,
         propertyName: React.PropTypes.string.isRequired,
         value: React.PropTypes.any
     },
 
     render() {
         const {
-            unit, propertyName, value
+            unit, noUnitSpace, propertyName, value
         } = this.props;
 
         let valueDisplayed;
@@ -57,7 +58,9 @@ const Card = React.createClass({
                     </span>
                 );
             }
-            valueDisplayed = (<span>{valueString} {unitDisplayed}</span>);
+
+            let unitSpace = noUnitSpace ? '' : ' ';
+            valueDisplayed = (<span>{valueString}{unitSpace}{unitDisplayed}</span>);
         } else {
             valueDisplayed = (<span className="unknownValue">Unknown</span>);
         }
