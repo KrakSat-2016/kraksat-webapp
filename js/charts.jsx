@@ -1,6 +1,8 @@
 import ReactHighstock from 'react-highcharts/ReactHighstock';
 import HighchartsExporting from 'highcharts-exporting';
+import HighchartsOfflineExporting from 'highcharts-offline-exporting';
 HighchartsExporting(ReactHighstock.Highcharts);
+HighchartsOfflineExporting(ReactHighstock.Highcharts);
 
 /**
  * Default range selector config for charts. Adds 1, 2, 3, 5min buttons.
