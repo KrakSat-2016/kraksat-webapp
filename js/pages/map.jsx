@@ -37,7 +37,7 @@ const Map = React.createClass({
                     anchor: new google.maps.Point(16, 16)
                 }
             });
-            this.request = $.get(config.serverUrl + '/gsinfo/latest/', function (result) {
+            this.request = $.get(config.serverUrl + '/gsinfo/?latest=1', function (result) {
                 // todo: get gsinfo on app start
                 gsMarker.state.marker.setPosition({lat: result.latitude, lng: result.longitude});
             });

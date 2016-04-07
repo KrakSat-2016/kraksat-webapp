@@ -3,7 +3,7 @@ import React from 'react';
 import { RequestHelper } from 'app/requesthelper';
 import {CardContainer, Card} from 'app/cards';
 
-let requestHelper = new RequestHelper('/planetarydata/latest/', config.refreshRates.planetaryData);
+let requestHelper = new RequestHelper('/planetarydata/?latest=1', config.refreshRates.planetaryData);
 
 
 const PlanetaryData = React.createClass({
