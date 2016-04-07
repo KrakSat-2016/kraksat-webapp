@@ -5,6 +5,7 @@
     "sht": 1000,
     "imu": 1000,
     "gps": 2500,
-    "planetaryData": 5000
+    "planetaryData": 5000,
+    "video": 10000
   }
 }

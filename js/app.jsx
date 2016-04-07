@@ -31,6 +31,7 @@ const AppLeftNav = React.createClass({
                     <ListItem primaryText="Map" value="/map"/>
                     <ListItem primaryText="GPS" value="/gps"/>
                     <ListItem primaryText="Planetary Data" value="/planet"/>
+                    <ListItem primaryText="Video" value="/video"/>
                 </SelectableList>
             </LeftNav>
         )
