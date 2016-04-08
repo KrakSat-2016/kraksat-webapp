@@ -24,7 +24,9 @@ const Map = React.createClass({
             this.request = $.get(config.serverUrl + '/gps/', function (result) {
                 // todo: auto refresh
                 for (let point of result) {
-                    path.push(new google.maps.LatLng(point.latitude, point.longitude));
+                    if (point.latitude != null && point.longitude != null) {
+                        path.push(new google.maps.LatLng(point.latitude, point.longitude));
+                    }
                 }
             });
 
