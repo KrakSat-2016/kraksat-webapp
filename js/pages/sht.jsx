@@ -19,6 +19,11 @@ const TemperatureChart = React.createClass({
         var config = {
             rangeSelector: chartRangeSelectorConfig,
             title: {text: 'Temperature'},
+            yAxis: {
+                labels: {
+                    format: '{value}℃'
+                }
+            },
             series: [{
                 name: 'Temperature',
                 data: requestHelper.data['temperature'].slice(),
@@ -41,6 +46,11 @@ const HumidityChart = React.createClass({
         var config = {
             rangeSelector: chartRangeSelectorConfig,
             title: {text: 'Humidity'},
+            yAxis: {
+                labels: {
+                    format: '{value}%'
+                }
+            },
             series: [{
                 name: 'Humidity',
                 data: requestHelper.data['humidity'].slice(),

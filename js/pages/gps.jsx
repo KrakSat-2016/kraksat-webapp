@@ -20,6 +20,11 @@ const AltitudeChart = React.createClass({
         var config = {
             rangeSelector: chartRangeSelectorConfig,
             title: {text: 'Altitude'},
+            yAxis: {
+                labels: {
+                    format: '{value} m'
+                }
+            },
             series: [{
                 name: 'Altitude',
                 data: requestHelper.data['altitude'].slice(),
@@ -42,6 +47,11 @@ const SpeedChart = React.createClass({
         var config = {
             rangeSelector: chartRangeSelectorConfig,
             title: {text: 'Speed over ground'},
+            yAxis: {
+                labels: {
+                    format: '{value} km/h'
+                }
+            },
             series: [{
                 name: 'Speed',
                 data: requestHelper.data['speed'].slice(),

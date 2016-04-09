@@ -38,6 +38,11 @@ let generateChartConfig = function (title, dataName, unit) {
     return {
         rangeSelector: chartRangeSelectorConfig,
         title: {text: title},
+        yAxis: {
+            labels: {
+                format: '{value} ' + unit
+            }
+        },
         series: [
             generateSerie(dataName, 'X', unit),
             generateSerie(dataName, 'Y', unit),
@@ -51,6 +56,11 @@ const PressureChart = React.createClass({
         let config = {
             rangeSelector: chartRangeSelectorConfig,
             title: {text: 'Pressure'},
+            yAxis: {
+                labels: {
+                    format: '{value} hPa'
+                }
+            },
             series: [{
                     name: 'Pressure',
                     data: requestHelper.data['pressure'].slice(),
